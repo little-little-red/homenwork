@@ -31,10 +31,10 @@ def guass_elimination(argmented_matrix):
     elif r_matrix == n:
         x = np.zeros(n)
         x[n - 1] = argmented_matrix[n, n - 1] / argmented_matrix[n - 1, n - 1]
-        for i in range(n - 1, -1, -1):
+        for i in range(n - 2, -1, -1):
             x[i] = (argmented_matrix[n, i] -
-                    np.dot(argmented_matrix[i + 1:n - 1, i],
-                           x[i + 1:n - 1])) / argmented_matrix[i, i]
+                    np.dot(argmented_matrix[i + 1:n, i],
+                           x[i + 1:n])) / argmented_matrix[i, i]
         print("这个方程组有唯一解", x)
         return x
     else:
@@ -45,7 +45,15 @@ def guass_elimination(argmented_matrix):
                                                            r_matrix - 1]
         for i in ker[r_matrix - 1::-1]:
             x[i] = (argmented_matrix[n, i] -
-                    np.dot(argmented_matrix[i + 1:n - 1, i],
-                           x[i + 1:n - 1])) / argmented_matrix[i, i]
+                    np.dot(argmented_matrix[i + 1:n, i],
+                           x[i + 1:n])) / argmented_matrix[i, i]
         print("这个方程组有无穷多解，这里只给出一个解：", x)
         return x
+
+
+if __name__ == "__main__":
+    import numpy as np
+    A = [[1, 2, 3, -1], [1, 1, -1, 2], [0, -1, -1, 3], [3, 1, 2, -1]]
+    b = [4, 1, -3, 4]
+    A_arg = np.vstack((A, b))
+    guass_elimination(A_arg)
