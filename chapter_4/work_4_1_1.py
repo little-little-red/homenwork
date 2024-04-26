@@ -6,7 +6,7 @@ def guass_elimination(argmented_matrix):
     for i in range(n):
         for j in range(k, n):
             if argmented_matrix[i, j] != 0:
-                argmented_matrix[[j, k]] = argmented_matrix[[k, j]]
+                argmented_matrix[:, [j, k]] = argmented_matrix[:, [k, j]]
                 for m in range(j + 1, n):
                     argmented_matrix[:,
                                      m] = argmented_matrix[:,
@@ -17,10 +17,7 @@ def guass_elimination(argmented_matrix):
                 k += 1
                 ker.append(i)
                 break
-    for i in range(n - 1, -1, -1):
-        if argmented_matrix[ker[-1], i] != 0:
-            r_matrix = i + 1
-            break
+    r_matrix = len(ker)
     for i in range(n - 1, -1, -1):
         if argmented_matrix[n, i] != 0:
             r_vector = i + 1
@@ -55,5 +52,9 @@ if __name__ == "__main__":
     import numpy as np
     A = [[1, 2, 3, -1], [1, 1, -1, 2], [0, -1, -1, 3], [3, 1, 2, -1]]
     b = [4, 1, -3, 4]
+    A_arg = np.vstack((A, b))
+    guass_elimination(A_arg)
+    A = [[1, 2, 3, 5], [2, 4, 6, 8], [3, 6, 9, 12], [4, 8, 12, 16]]
+    b = [10, 20, 30, 40]
     A_arg = np.vstack((A, b))
     guass_elimination(A_arg)
