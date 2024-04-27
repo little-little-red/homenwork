@@ -1,3 +1,4 @@
+# 本程序由于作者对矩阵的理解，将所有有关行和列的操作都对换了，且系数矩阵只能是方阵，输入时请注意
 def guass_elimination(argmented_matrix):
     """
     Perform Gaussian elimination on an augmented matrix to solve a system of linear equations.
